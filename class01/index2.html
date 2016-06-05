@@ -30,7 +30,7 @@
   .anscombe-circle-group circle {
     fill: red;
     stroke: #fff;
-    stroke-width:1px;
+    opacity: 0.8;
   }
 </style>
 
@@ -60,10 +60,10 @@ var width = 720 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 var x = d3.scale.linear()
     .range([0, width])
-    .domain([4, 15]);
+    .domain([0, 15]);
 var y = d3.scale.linear()
     .range([height, 0])
-    .domain([2, 11]);
+    .domain([0, 11]);
 var xAxis = d3.svg.axis()
     .scale(x)
     .tickSize(-height)
@@ -96,6 +96,7 @@ var circleGroup = svg.selectAll(".anscombe-circle-group")
 circleGroup.append("circle")
     .attr("r", 5);
 circleGroup.append("text")
-    .text(function(d) { return "(" + d.x + "," + d.y + ")"; })
-    .attr("dx", 6);
+    .text(function(d) { return d.x + "," + d.y; })
+    .attr("dx", -16)
+    .attr("dy", -12);
 </script>
