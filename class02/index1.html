@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style type="text/css">
+
+		.axis path {
+			fill: none;
+			stroke: #666;
+			stroke-width: 1;
+		}
+
+		.axis text {
+			font: 12px sans-serif;
+		}
+
+		.axis line {
+			stroke: #ff6666;
+			stroke-width: 1;
+		}
+
+	</style>
+</head>
+<body>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+
+<script>
+
+	var anscombeData = [
+
+	{'group': 'III',	'x': 10, 'y':	7.46},
+	{'group': 'III',	'x': 8, 'y':		6.77},
+	{'group': 'III',	'x': 13, 'y':		12.74},
+	{'group': 'III',	'x': 9, 'y':		7.11},
+	{'group': 'III',	'x': 11, 'y':		7.81},
+	{'group': 'III',	'x': 14, 'y':		8.84},
+	{'group': 'III',	'x': 6, 'y':		6.08},
+	{'group': 'III',	'x': 4, 'y':		5.39},
+	{'group': 'III',	'x': 12, 'y':		8.15},
+	{'group': 'III',	'x': 7, 'y':		6.42},
+	{'group': 'III',	'x': 5, 'y':		5.73}
+
+	];
+
+	console.log(anscombeData);
+
+	var margin = {top: 20, right: 10, bottom: 20, left: 50};
+
+	var width = 720 - margin.left - margin.right,
+	   height = 400 - margin.top - margin.bottom;
+
+	var svg = d3.select("body")
+	   .append("svg")
+	   .attr("width", width + margin.left + margin.right)
+	   .attr("height", height + margin.top + margin.bottom)
+	   .append("g")
+	   .attr("transform","translate(" + margin.left  + "," + margin.top + ")")
+
+	var xScale = d3.scale.linear()
+	   .domain(d3.extent(anscombeData, function(d) { return d.x; }))
+	   .range([0, width])
+
+	var yScale = d3.scale.linear()
+	   .domain(d3.extent(anscombeData, function(d) { return d.y; }))
+	   .range([height, 0])
+
+	var xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient('bottom');
+
+	var yAxis = d3.svg.axis()
+		.scale(yScale)
+		.orient('left');
+
+	var circles = svg.selectAll(".anscombe-circles")
+	   .data(anscombeData)
+	   .enter().append("circle")
+	   .attr("cx", function(d) { return xScale(d.x) })
+	   .attr("cy", function(d) { return yScale(d.y); })
+	   .attr("r", 10);
+
+	svg.append('g')
+		.attr('class', 'x axis')
+		.attr('transform', 'translate(0,' + height + ')')
+		.call(xAxis)
+
+	svg.append('g')
+		.attr('class', 'y axis')
+		// does not need transform or translate because
+		// y axis starts from top left corner
+		.call(yAxis)
+
+	console.log("X domain: ", xScale.domain())
+	console.log("X range: ", xScale.range())
+
+</script>
+</html>
