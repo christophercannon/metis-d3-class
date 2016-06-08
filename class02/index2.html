@@ -13,20 +13,35 @@
 	}
 
 	.axis line {
-	   stroke: #bfbfbf ;
-	   stroke-width: 2;
-	   stroke-dasharray: 3;
+	   stroke: #ccc ;
+	   stroke-width: 1;
+	   stroke-dasharray: 2,2;
 	   /*stroke-opacity: .25;*/
 	}
 
 	.anscombe-circles {
-
-	   fill: red;
+	   fill: #ff0066;
 	   fill-opacity: .75;
-
+     -webkit-transition:  .5s ease;
+      -moz-transition:  .5s ease;
+      -o-transition:  .5s ease;
+      transition:  .5s ease;
 	}
+
+	.anscombe-circle-group text {
+		z-index: 999;
+		-webkit-transition:  .5s ease;
+      -moz-transition:  .5s ease;
+      -o-transition:  .5s ease;
+      transition:  .5s ease;
+	}
+
 	.axis text {
 	   font: 12px sans-serif;
+	}
+
+	.x.axis text {
+		
 	}
 
 	</style>
@@ -35,30 +50,31 @@
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+<!-- <script src="d3.v2.min.js"></script> -->
 
 <script>
  //JS to go here
 
 var anscombeData = [
-    {'group':'III',    'x': 10, 'y':     7.46},
-    {'group':'III',    'x': 8 , 'y': 6.77},
-    {'group':'III',    'x': 13, 'y':     12.74},
-    {'group':'III',    'x': 9 , 'y': 7.11},
-    {'group':'III',    'x': 11, 'y':     7.81},
-    {'group':'III',    'x': 14, 'y':     8.84},
-    {'group':'III',    'x': 6    , 'y': 6.08},
-    {'group':'III',    'x': 4    , 'y': 5.39},
-    {'group':'III',    'x': 12, 'y':     8.15},
-    {'group':'III',    'x': 7    , 'y': 6.42},
-    {'group':'III',    'x': 5    , 'y': 5.73}
+    {'group':'I', 'x': 10,  'y':  8.04},
+    {'group':'I', 'x': 8,   'y':  6.95},
+    {'group':'I', 'x': 13,  'y':  7.58},
+    {'group':'I', 'x': 9,   'y':  8.81},
+    {'group':'I', 'x': 11,  'y':  8.33},
+    {'group':'I', 'x': 14,  'y':  9.96},
+    {'group':'I', 'x': 6,   'y':  7.24},
+    {'group':'I', 'x': 4,   'y':  4.26},
+    {'group':'I', 'x': 12,  'y':  10.84},
+    {'group':'I', 'x': 7,   'y':  4.82},
+    {'group':'I', 'x': 5,   'y':  5.68}
 ];
 
 console.log(anscombeData);
 
 var margin = {top: 50, right: 50, bottom: 50, left: 50};
 
-var width = 500 - margin.left - margin.right,
-   height = 500 - margin.top - margin.bottom;
+var width = 700 - margin.left - margin.right,
+   height = 700 - margin.top - margin.bottom;
 
 var svg = d3.select("body")
    .append("svg")
@@ -68,36 +84,37 @@ var svg = d3.select("body")
    .attr("transform","translate(" + margin.left  + "," + margin.top + ")")
 
 var xScale = d3.scale.linear()
-   .domain([0,15])
+   .domain([0,14])
    .range([0, width])
 
 var yScale = d3.scale.linear()
-   .domain([0,15])
+   .domain([0,14])
    .range([height, 0])
 
+var axisTextPadding = 20;
 
 var xAxis = d3.svg.axis()
    .scale(xScale)
-   .ticks(15)
+   .ticks(7)
    .tickSize(-height)
    .orient("bottom");
 
 var yAxis = d3.svg.axis()
    .scale(yScale)
-   .ticks(15)
+   .ticks(7)
    .tickSize(-width)
    .orient("left");  
-
-
 
 svg.append("g")
    .attr("class", "x axis")
    .attr("transform","translate(0," + height + ")" )
+   .attr("dy", "1em")
    .call(xAxis)
 
 svg.append("g")
    .attr("class", "y axis")
    .call(yAxis)
+
 
 // var circles = svg.selectAll(".anscombe-circles")
 //     .data(anscombeData)
@@ -116,36 +133,41 @@ var circleGroups = svg.selectAll(".anscombe-circle-group")
 
 circleGroups.append("text")
    .attr("class",function(d,i) { return "T" + i })
-   .attr("dx", 5)
-   .attr("dy", 5)
-   .text(function(d) { return d.x + ", " + d.y; })
-   .style("fill","none")
-   .style("font","8px sans-serif")
+   .attr("dx", -35)
+   .attr("dy", -18)
+   .text(function(d) { return "x: " + d.x + ", y: " + d.y; })
+   .style("fill-opacity","0")
+   .style("font","13px sans-serif")
+   .style("font-weight","bold")
 
 circleGroups.append("circle")
   .attr("class",function(d,i) { return "anscombe-circles T" + i; })
-  .attr("r", 5)
+  .attr("r", 10)
   .on("mouseenter", function() { 
-       var myClass = d3.select(this).attr("class").split(" ")[1];
-       d3.selectAll("." + myClass)
-       .style("fill","#000")
+     var myClass = d3.select(this).attr("class").split(" ")[1];
+     d3.selectAll("." + myClass)
+       .style("fill-opacity","1")
+     d3.select(this)
+       .style("stroke-width","2")
+       .style("stroke","#000")
   })
   .on("mouseleave", function() { 
        
        d3.selectAll(".anscombe-circle-group")
          .selectAll("text")
-         .style("fill","none")
+         .style("fill-opacity","0")
 
       d3.selectAll(".anscombe-circles")
-         .style("fill","red")
+         .style("stroke-width","0")
+         .style("fill-opacity","0.75")
   });
 
 svg.append("line")
   .attr("x1", 0)
-  .attr("x2", width)
+  .attr("x2", width + 10)
   .attr("y1", height)
   .attr("y2", height)
-  .style("stroke","#000")
+  .style("stroke","#333")
 
 console.log("domain", xScale.domain())
 console.log("range", xScale.range())
