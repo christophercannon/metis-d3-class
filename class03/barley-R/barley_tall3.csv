@@ -1,0 +1,121 @@
+NewCol,site,variety,pct_chg,yield,value,increase
+Crookston: Glabron,Crookston,Glabron,-31.2,1931,38.1,FALSE
+Crookston: Glabron,Crookston,Glabron,-31.2,1932,26.2,FALSE
+Crookston: Manchuria,Crookston,Manchuria,-17.3,1931,39.9,FALSE
+Crookston: Manchuria,Crookston,Manchuria,-17.3,1932,33,FALSE
+Crookston: No. 457,Crookston,No. 457,-24.9,1931,45.7,FALSE
+Crookston: No. 457,Crookston,No. 457,-24.9,1932,34.3,FALSE
+Crookston: No. 462,Crookston,No. 462,-37.2,1931,48.6,FALSE
+Crookston: No. 462,Crookston,No. 462,-37.2,1932,30.5,FALSE
+Crookston: No. 475,Crookston,No. 475,-27.2,1931,44.1,FALSE
+Crookston: No. 475,Crookston,No. 475,-27.2,1932,32.1,FALSE
+Crookston: Peatland,Crookston,Peatland,-39.4,1931,41.6,FALSE
+Crookston: Peatland,Crookston,Peatland,-39.4,1932,25.2,FALSE
+Crookston: Svansota,Crookston,Svansota,-49.1,1931,40.5,FALSE
+Crookston: Svansota,Crookston,Svansota,-49.1,1932,20.6,FALSE
+Crookston: Trebi,Crookston,Trebi,-10.9,1931,46.9,FALSE
+Crookston: Trebi,Crookston,Trebi,-10.9,1932,41.8,FALSE
+Crookston: Velvet,Crookston,Velvet,-22.3,1931,41.3,FALSE
+Crookston: Velvet,Crookston,Velvet,-22.3,1932,32.1,FALSE
+Crookston: Wisconsin No. 38,Crookston,Wisconsin No. 38,-28.1,1931,49.9,FALSE
+Crookston: Wisconsin No. 38,Crookston,Wisconsin No. 38,-28.1,1932,35.9,FALSE
+Duluth: Glabron,Duluth,Glabron,-12.8,1931,29.7,FALSE
+Duluth: Glabron,Duluth,Glabron,-12.8,1932,25.9,FALSE
+Duluth: Manchuria,Duluth,Manchuria,-22.1,1931,29,FALSE
+Duluth: Manchuria,Duluth,Manchuria,-22.1,1932,22.6,FALSE
+Duluth: No. 457,Duluth,No. 457,-32.4,1931,33.6,FALSE
+Duluth: No. 457,Duluth,No. 457,-32.4,1932,22.7,FALSE
+Duluth: No. 462,Duluth,No. 462,-19.9,1931,28.1,FALSE
+Duluth: No. 462,Duluth,No. 462,-19.9,1932,22.5,FALSE
+Duluth: No. 475,Duluth,No. 475,-17.2,1931,33.1,FALSE
+Duluth: No. 475,Duluth,No. 475,-17.2,1932,27.4,FALSE
+Duluth: Peatland,Duluth,Peatland,-1.9,1931,32,FALSE
+Duluth: Peatland,Duluth,Peatland,-1.9,1932,31.4,FALSE
+Duluth: Svansota,Duluth,Svansota,-13.6,1931,25.7,FALSE
+Duluth: Svansota,Duluth,Svansota,-13.6,1932,22.2,FALSE
+Duluth: Trebi,Duluth,Trebi,-9.7,1931,33.9,FALSE
+Duluth: Trebi,Duluth,Trebi,-9.7,1932,30.6,FALSE
+Duluth: Velvet,Duluth,Velvet,-14.4,1931,26.3,FALSE
+Duluth: Velvet,Duluth,Velvet,-14.4,1932,22.5,FALSE
+Duluth: Wisconsin No. 38,Duluth,Wisconsin No. 38,-7.3,1931,31.6,FALSE
+Duluth: Wisconsin No. 38,Duluth,Wisconsin No. 38,-7.3,1932,29.3,FALSE
+Grand Rapids: Glabron,Grand Rapids,Glabron,-50.5,1931,29.1,FALSE
+Grand Rapids: Glabron,Grand Rapids,Glabron,-50.5,1932,14.4,FALSE
+Grand Rapids: Manchuria,Grand Rapids,Manchuria,-33,1931,33,FALSE
+Grand Rapids: Manchuria,Grand Rapids,Manchuria,-33,1932,22.1,FALSE
+Grand Rapids: No. 457,Grand Rapids,No. 457,-39.4,1931,32.2,FALSE
+Grand Rapids: No. 457,Grand Rapids,No. 457,-39.4,1932,19.5,FALSE
+Grand Rapids: No. 462,Grand Rapids,No. 462,-20.1,1931,24.9,FALSE
+Grand Rapids: No. 462,Grand Rapids,No. 462,-20.1,1932,19.9,FALSE
+Grand Rapids: No. 475,Grand Rapids,No. 475,-22.8,1931,19.7,FALSE
+Grand Rapids: No. 475,Grand Rapids,No. 475,-22.8,1932,15.2,FALSE
+Grand Rapids: Peatland,Grand Rapids,Peatland,-22.8,1931,34.7,FALSE
+Grand Rapids: Peatland,Grand Rapids,Peatland,-22.8,1932,26.8,FALSE
+Grand Rapids: Svansota,Grand Rapids,Svansota,-44.1,1931,29.7,FALSE
+Grand Rapids: Svansota,Grand Rapids,Svansota,-44.1,1932,16.6,FALSE
+Grand Rapids: Trebi,Grand Rapids,Trebi,-30.9,1931,29.8,FALSE
+Grand Rapids: Trebi,Grand Rapids,Trebi,-30.9,1932,20.6,FALSE
+Grand Rapids: Velvet,Grand Rapids,Velvet,40,1931,23,TRUE
+Grand Rapids: Velvet,Grand Rapids,Velvet,40,1932,32.2,TRUE
+Grand Rapids: Wisconsin No. 38,Grand Rapids,Wisconsin No. 38,-40,1931,34.5,FALSE
+Grand Rapids: Wisconsin No. 38,Grand Rapids,Wisconsin No. 38,-40,1932,20.7,FALSE
+Morris: Glabron,Morris,Glabron,21.9,1931,28.8,TRUE
+Morris: Glabron,Morris,Glabron,21.9,1932,35.1,TRUE
+Morris: Manchuria,Morris,Manchuria,25.5,1931,27.4,TRUE
+Morris: Manchuria,Morris,Manchuria,25.5,1932,34.4,TRUE
+Morris: No. 457,Morris,No. 457,51.6,1931,28.7,TRUE
+Morris: No. 457,Morris,No. 457,51.6,1932,43.5,TRUE
+Morris: No. 462,Morris,No. 462,54.6,1931,30.4,TRUE
+Morris: No. 462,Morris,No. 462,54.6,1932,47,TRUE
+Morris: No. 475,Morris,No. 475,95.6,1931,22.6,TRUE
+Morris: No. 475,Morris,No. 475,95.6,1932,44.2,TRUE
+Morris: Peatland,Morris,Peatland,44.5,1931,29.9,TRUE
+Morris: Peatland,Morris,Peatland,44.5,1932,43.2,TRUE
+Morris: Svansota,Morris,Svansota,35.7,1931,25.8,TRUE
+Morris: Svansota,Morris,Svansota,35.7,1932,35,TRUE
+Morris: Trebi,Morris,Trebi,6.4,1931,43.8,TRUE
+Morris: Trebi,Morris,Trebi,6.4,1932,46.6,TRUE
+Morris: Velvet,Morris,Velvet,48.7,1931,26.1,TRUE
+Morris: Velvet,Morris,Velvet,48.7,1932,38.8,TRUE
+Morris: Wisconsin No. 38,Morris,Wisconsin No. 38,60,1931,29.5,TRUE
+Morris: Wisconsin No. 38,Morris,Wisconsin No. 38,60,1932,47.2,TRUE
+University Farm: Glabron,University Farm,Glabron,-14.6,1931,43.1,FALSE
+University Farm: Glabron,University Farm,Glabron,-14.6,1932,36.8,FALSE
+University Farm: Manchuria,University Farm,Manchuria,-0.4,1931,27,FALSE
+University Farm: Manchuria,University Farm,Manchuria,-0.4,1932,26.9,FALSE
+University Farm: No. 457,University Farm,No. 457,-39,1931,43.3,FALSE
+University Farm: No. 457,University Farm,No. 457,-39,1932,26.4,FALSE
+University Farm: No. 462,University Farm,No. 462,-30.1,1931,36.6,FALSE
+University Farm: No. 462,University Farm,No. 462,-30.1,1932,25.6,FALSE
+University Farm: No. 475,University Farm,No. 475,21.5,1931,24.7,TRUE
+University Farm: No. 475,University Farm,No. 475,21.5,1932,30,TRUE
+University Farm: Peatland,University Farm,Peatland,-14.3,1931,32.8,FALSE
+University Farm: Peatland,University Farm,Peatland,-14.3,1932,28.1,FALSE
+University Farm: Svansota,University Farm,Svansota,-21.9,1931,35.1,FALSE
+University Farm: Svansota,University Farm,Svansota,-21.9,1932,27.4,FALSE
+University Farm: Trebi,University Farm,Trebi,-20.5,1931,36.6,FALSE
+University Farm: Trebi,University Farm,Trebi,-20.5,1932,29.1,FALSE
+University Farm: Velvet,University Farm,Velvet,-32.8,1931,39.9,FALSE
+University Farm: Velvet,University Farm,Velvet,-32.8,1932,26.8,FALSE
+University Farm: Wisconsin No. 38,University Farm,Wisconsin No. 38,-3.3,1931,39.3,FALSE
+University Farm: Wisconsin No. 38,University Farm,Wisconsin No. 38,-3.3,1932,38,FALSE
+Waseca: Glabron,Waseca,Glabron,-31.7,1931,55.2,FALSE
+Waseca: Glabron,Waseca,Glabron,-31.7,1932,37.7,FALSE
+Waseca: Manchuria,Waseca,Manchuria,-31.5,1931,48.9,FALSE
+Waseca: Manchuria,Waseca,Manchuria,-31.5,1932,33.5,FALSE
+Waseca: No. 457,Waseca,No. 457,-27.4,1931,58.1,FALSE
+Waseca: No. 457,Waseca,No. 457,-27.4,1932,42.2,FALSE
+Waseca: No. 462,Waseca,No. 462,-32.1,1931,65.8,FALSE
+Waseca: No. 462,Waseca,No. 462,-32.1,1932,44.7,FALSE
+Waseca: No. 475,Waseca,No. 475,-11.8,1931,46.8,FALSE
+Waseca: No. 475,Waseca,No. 475,-11.8,1932,41.3,FALSE
+Waseca: Peatland,Waseca,Peatland,-25.9,1931,48.6,FALSE
+Waseca: Peatland,Waseca,Peatland,-25.9,1932,36,FALSE
+Waseca: Svansota,Waseca,Svansota,-18.6,1931,47.3,FALSE
+Waseca: Svansota,Waseca,Svansota,-18.6,1932,38.5,FALSE
+Waseca: Trebi,Waseca,Trebi,-22.9,1931,63.8,FALSE
+Waseca: Trebi,Waseca,Trebi,-22.9,1932,49.2,FALSE
+Waseca: Velvet,Waseca,Velvet,-25.5,1931,50.2,FALSE
+Waseca: Velvet,Waseca,Velvet,-25.5,1932,37.4,FALSE
+Waseca: Wisconsin No. 38,Waseca,Wisconsin No. 38,-1,1931,58.8,FALSE
+Waseca: Wisconsin No. 38,Waseca,Wisconsin No. 38,-1,1932,58.2,FALSE
