@@ -7,28 +7,29 @@
 <style type="text/css">
  
  div { 
-
   display: inline-block;
-
  }
 
 .axis {
-
   font: 12px sans-serif;
+}
 
+svg text, h2 {
+  font-family: sans-serif;
 }
 
 .domain {
-
   fill: none;
   stroke: #000;
 }
 
- .varietyLines {
-
+.varietyLines {
   stroke-width: 3;
+}
 
- }
+input {
+  /*display: block;*/
+}
 
 </style>
 
@@ -70,13 +71,13 @@ d3.tsv("data.tsv", function(error, data) {
 var places = d3.set(data.map(function(d) { return d.site })).values();
 
    drawSlopeGraph('Crookston', 60);
-
+   console.log("Places: ", places);
 
 d3.select("body").append("input")
   .attr("type", "range")
   .attr("min", 30)
   .attr("max", 100)
-  .attr("step", 5)
+  .attr("step", 1)
   .on("input", function() {
 
     var myValue = this.value
@@ -134,7 +135,7 @@ yScale.domain([d3.min(data, function(d) { return d.yield }), maxYDomain]);
 
 
 circleGroup1932.append("text")
-  .attr("dx", 8)
+  .attr("dx", 12).attr("dy", 5)
   .attr("class", function(d) { return d.variety.replace(".","").replace(" ",""); })
   .text(function(d) { return d.variety; })
   .style("fill", function(d) { return colorScale(d.variety); })
@@ -170,7 +171,7 @@ circleGroup1932.append("text")
 
     d3.selectAll(".varietyLines")
         .transition()
-        .duration(2000)
+        .duration(500)
         .ease("linear")
         .attr("stroke-dashoffset", 0);
 }
