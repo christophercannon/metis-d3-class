@@ -9,18 +9,24 @@ body {
 }
 
 .axis {
-    stroke-dasharray: 2, 2;
-    stroke-opacity: .5;
-    stroke: #000;
+  stroke-dasharray: 2, 2;
+  stroke-opacity: .5;
+  stroke: #000;
+}
+
+.x.axis line {
+  stroke-dasharray: 0;
+  stroke-opacity: 1;
+  stroke: #666;
 }
 
 .domain {
-    fill: none;
-    stroke: #000;
+  fill: none;
+  stroke: #000;
 }
 
 .dots {
-    fill: #ff6666;
+  fill: steelblue;
 }
 
 div {
@@ -29,20 +35,15 @@ div {
 
 .countryLines {
 
-    fill: none;
-    stroke: #ff6666;
-    stroke-width: 1;
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1;
 }
 
-.UnitedStates {
+.United.States {
 
   stroke: purple;
   stroke-width: 2;
-}
-
-h1 {
-  color: #ff6666;
-  margin: 20px 0px 0px 18px;
 }
 
 
@@ -53,34 +54,35 @@ h1 {
 
 <script>
 
-var margin = {top: 20, right: 20, bottom: 20, left: 20};
-var width = 200 - margin.left - margin.right,
-    height = 200 - margin.top - margin.bottom;
+var margin = {top: 20, right: 50, bottom: 20, left: 20};
+var width = 120 - margin.left - margin.right,
+    height = 250 - margin.top - margin.bottom;
 
 var xScale = d3.time.scale()
-    .range([0,width])
+  .range([0,width])
 
 var yScale = d3.scale.linear()
-    .range([height, 0])
+  .range([height, 0])
 
 var xAxis = d3.svg.axis()
-    .scale(xScale)
-    .tickSize(-height)
-    .orient("bottom")
+  .scale(xScale)
+  .ticks(2)
+  .tickSize(10)
+  .orient("bottom")
 
 var parseDate = d3.time.format("%Y").parse,
-    formatDate = d3.time.format("%Y");
+  formatDate = d3.time.format("%Y");
 
 var yAxis = d3.svg.axis()
-    .scale(yScale)
-    .tickSize(-width)
-    .orient("right")
-    .tickFormat(d3.format("$,"))
+  .scale(yScale)
+  .tickSize(-width)
+  .orient("right")
+  .tickFormat(d3.format("$,"))
  
  var incomeLine = d3.svg.line()
-     .interpolate("cardinal")
-     .x(function(d) { return xScale(d.year); })
-     .y(function(d) { return yScale(d.val); })
+  .interpolate("cardinal")
+  .x(function(d) { return xScale(d.year); })
+  .y(function(d) { return yScale(d.val); })
 
 
 d3.csv("incomes.csv", function(error, data) {
@@ -88,43 +90,54 @@ d3.csv("incomes.csv", function(error, data) {
    if (error) return console.warn(error);
 
    data.forEach(function(d) {
-       d.val = +d.val;
-       d.year = parseDate(d.year);
-       d.jsVersion = new Date(d.year);
-       d.formattedYear = formatDate(d.year);
+    d.val = +d.val;
+    d.year = parseDate(d.year);
    })
 
-   var medianData = data.filter(function(d) { return  d.cutoff == 'cop50' })
+   // var medianData = data.filter(function(d) { return  d.cutoff == 'cop50' })
 
    xScale.domain(d3.extent(data, function(d) { return d.year; }))
    yScale.domain(d3.extent(data, function(d) { return +d.val; }))
 
 
-
-  var nestedCountryData = d3.nest()
+  nestedCountryData = d3.nest()
+    .key(function(d) { return d.cutoff })
     .key(function(d) { return d.country })
-    .sortKeys(d3.ascending)
-    .entries(medianData)
-
+    .sortKeys(d3.descending)
+    .entries(data)
 
   var divContainer = d3.select("body")
     .selectAll("div")
     .data(nestedCountryData)
   .enter().append("div");
 
-divContainer.append("h1")
+divContainer.append("h2")
   .text(function(d) { return d.key })
 
 var svg = divContainer.append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-    svg.append("path")
-      .datum(function(d) { return d.values })
-    .attr("class",  "countryLines " )
-    .attr("d", incomeLine )
+
+    svg.selectAll("countryLines")
+      .data(function(d) { return d.values })
+    .enter().append("path")
+    .attr("class",  function(d) { return "countryLines " + d.key })
+    .attr("d", function(d) { return incomeLine([d.values[0],d.values[d.values.length-1]]); })
+    .on("mouseenter", function(d) {
+      d3.select(this)
+        .style("stroke","#000")
+        .style("stroke-width","2")
+        console.log('key: ', d.key)
+    })
+    .on("mouseleave", function(d) {
+      d3.select(this)
+        .style("stroke","steelblue")
+        .style("stroke-width","1")
+    })
+
 
   // svg.selectAll(".countryLines")
   //   .data(nestedCountryData)

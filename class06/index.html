@@ -9,18 +9,18 @@ body {
 }
 
 .axis {
-    stroke-dasharray: 2, 2;
-    stroke-opacity: .5;
-    stroke: #000;
+  stroke-dasharray: 2, 2;
+  stroke-opacity: .5;
+  stroke: #000;
 }
 
 .domain {
-    fill: none;
-    stroke: #000;
+  fill: none;
+  stroke: #000;
 }
 
 .dots {
-    fill: #ff6666;
+  fill: steelblue;
 }
 
 div {
@@ -29,20 +29,15 @@ div {
 
 .countryLines {
 
-    fill: none;
-    stroke: #ff6666;
-    stroke-width: 1;
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1;
 }
 
 .UnitedStates {
 
   stroke: purple;
   stroke-width: 2;
-}
-
-h1 {
-  color: #ff6666;
-  margin: 20px 0px 0px 18px;
 }
 
 
@@ -53,34 +48,34 @@ h1 {
 
 <script>
 
-var margin = {top: 20, right: 20, bottom: 20, left: 20};
-var width = 200 - margin.left - margin.right,
-    height = 200 - margin.top - margin.bottom;
+var margin = {top: 20, right: 50, bottom: 20, left: 20};
+var width = 300 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 var xScale = d3.time.scale()
-    .range([0,width])
+  .range([0,width])
 
 var yScale = d3.scale.linear()
-    .range([height, 0])
+  .range([height, 0])
 
 var xAxis = d3.svg.axis()
-    .scale(xScale)
-    .tickSize(-height)
-    .orient("bottom")
+  .scale(xScale)
+  .tickSize(-height)
+  .orient("bottom")
 
 var parseDate = d3.time.format("%Y").parse,
-    formatDate = d3.time.format("%Y");
+  formatDate = d3.time.format("%Y");
 
 var yAxis = d3.svg.axis()
-    .scale(yScale)
-    .tickSize(-width)
-    .orient("right")
-    .tickFormat(d3.format("$,"))
+  .scale(yScale)
+  .tickSize(-width)
+  .orient("right")
+  .tickFormat(d3.format("$,"))
  
  var incomeLine = d3.svg.line()
-     .interpolate("cardinal")
-     .x(function(d) { return xScale(d.year); })
-     .y(function(d) { return yScale(d.val); })
+  .interpolate("cardinal")
+  .x(function(d) { return xScale(d.year); })
+  .y(function(d) { return yScale(d.val); })
 
 
 d3.csv("incomes.csv", function(error, data) {
@@ -88,10 +83,10 @@ d3.csv("incomes.csv", function(error, data) {
    if (error) return console.warn(error);
 
    data.forEach(function(d) {
-       d.val = +d.val;
-       d.year = parseDate(d.year);
-       d.jsVersion = new Date(d.year);
-       d.formattedYear = formatDate(d.year);
+    d.val = +d.val;
+    d.year = parseDate(d.year);
+    d.jsVersion = new Date(d.year);
+    d.formattedYear = formatDate(d.year);
    })
 
    var medianData = data.filter(function(d) { return  d.cutoff == 'cop50' })
@@ -100,12 +95,11 @@ d3.csv("incomes.csv", function(error, data) {
    yScale.domain(d3.extent(data, function(d) { return +d.val; }))
 
 
-
-  var nestedCountryData = d3.nest()
+  nestedCountryData = d3.nest()
+    .key(function(d) { return d.cutoff })
     .key(function(d) { return d.country })
-    .sortKeys(d3.ascending)
-    .entries(medianData)
-
+    .sortKeys(d3.descending)
+    .entries(data)
 
   var divContainer = d3.select("body")
     .selectAll("div")
@@ -121,10 +115,11 @@ var svg = divContainer.append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    svg.append("path")
-      .datum(function(d) { return d.values })
+    svg.selectAll("countryLines")
+      .data(function(d) { return d.values })
+    .enter().append("path")
     .attr("class",  "countryLines " )
-    .attr("d", incomeLine )
+    .attr("d", function(d) { return incomeLine(d.values) } )
 
   // svg.selectAll(".countryLines")
   //   .data(nestedCountryData)
