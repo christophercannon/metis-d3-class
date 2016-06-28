@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+<style type="text/css">
+ 
+.axis line {
+    stroke-dasharray: 2, 2;
+    stroke-opacity: .5;
+    stroke: #000;
+}
+.axis text {
+    font: 10px sans-serif;
+}
+.domain {
+    fill: none;
+    stroke: #000;
+}
+.dots {
+    fill: steelblue;
+}
+.incomeLine {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1;
+}
+</style>
+<body>
+<div id='countryButtons'></div>
+</body>
+<script>
+var margin = {top: 60, right: 60, bottom: 60, left: 80};
+var width = 800 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+var xScale = d3.time.scale()
+    .range([0,width])
+var yScale = d3.scale.linear()
+    .range([height, 0])
+var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .tickSize(-height)
+    .orient("bottom")
+var parseDate = d3.time.format("%Y").parse,
+    formatDate = d3.time.format("%Y");
+var yAxis = d3.svg.axis()
+    .scale(yScale)
+    .tickSize(-width)
+    .orient("right")
+    .tickFormat(d3.format("$,"))
+ 
+ var incomeLine = d3.svg.line()
+    .interpolate("cardinal")
+    .x(function(d) { return xScale(d.year); })
+    .y(function(d) { return yScale(d.val); })
+  var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+d3.csv("incomes.csv", function(error, data) {
+   if (error) return console.warn(error);
+   console.log(data);
+   data.forEach(function(d) {
+    d.val = +d.val;
+    d.year = parseDate(d.year);
+   })
+   var medianData = data.filter(function(d) { return d.cutoff == 'cop50' })
+   var nestedMedianData = d3.nest()
+    .key(function(d) { return d.country; })
+    .entries(medianData)
+   var usData = nestedMedianData.filter(function(d) { return d.key == 'United States'; })
+   xScale.domain(d3.extent(data, function(d) { return d.year; }))
+   yScale.domain(d3.extent(usData[0].values, function(d) { return d.val; })).nice()
+   var countryButtons = d3.select("#countryButtons")
+    .selectAll(".buttons")
+    .data(nestedMedianData)
+    .enter().append("button")
+    .text(function(d) { return d.key; })
+    .on("click", function(d) { updateChart(d.values); })
+    // function that updates the chart when a button is clicked (invoked right above!)
+    function updateChart(dataset) {
+    // updating the y-scale domain
+    yScale.domain(d3.extent(dataset, function(d) { return d.val; })).nice()
+    // selecting all the dots and binding the new dataset
+    var dotUpdate = svg.selectAll(".dots")
+        .data(dataset, function(d) { return d.year });
+    // updating the positions of the existing dots
+    dotUpdate.transition()
+          .style("fill","orange")
+          .attr("cx", function(d) { return xScale(d.year); })
+          .attr("cy", function(d) { return yScale(d.val); })
+    // appending the new dots 
+    dotUpdate.enter().append("circle")
+          .attr("class","dots")
+          .attr("r", 8)
+        .transition()
+          .style("fill","green")
+          .attr("cx", function(d) { return xScale(d.year); })
+          .attr("cy", function(d) { return yScale(d.val); })
+    // handles old dots that no longer have data bound to it
+      dotUpdate.exit()
+       .style("fill","red")
+        .transition()
+        .duration(2000)
+       .remove();
+      // updates the path, our curvy line
+      svg.select(".incomeLine")
+        .datum(dataset)
+        .attr("d", incomeLine)
+      // updates the y axis since its different for each country
+       svg.select(".y")
+        .transition()
+        .duration(2000)
+        .ease("quad")
+        .call(yAxis)
+    }
+   svg.append("g")
+    .attr("class", "y axis")
+    .attr("transform","translate(" + width + ",0)")
+    .call(yAxis)
+  svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform","translate(0," + height + ")")
+    .call(xAxis)
+  svg.selectAll(".dots")
+    .data(usData[0].values, function(d) { return d.year })
+  .enter().append("circle")
+    .attr("class","dots")
+    .attr("cx", function(d) { return xScale(d.year); })
+    .attr("cy", function(d) { return yScale(d.val); })
+    .attr("r", 8)
+    .on("mouseenter", function(d) {
+        console.log(d)
+    })
+  svg.append("path")
+    .datum(usData[0].values)
+    .attr("class", "incomeLine")
+    .attr("d", incomeLine)
+ });
+</script>
