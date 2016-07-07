@@ -42,8 +42,8 @@
 
 <script type="text/javascript">
   
-var width = 960,
-    height = 500;
+var width = 1960,
+    height = 1500;
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -61,13 +61,15 @@ var colorScale = d3.scale.threshold()
 function ready(error, guns, us) {
   if (error) return console.warn(error);
 
-  console.log(us);
-  console.log(topojson.feature(us, us.objects.counties).features);
-  console.log(guns);
+  // console.log(us);
+  // console.log(topojson.feature(us, us.objects.counties).features);
+  // console.log(guns);
   var countyFeatures = topojson.feature(us, us.objects.counties).features;
   var stateFeatures = topojson.feature(us, us.objects.states).features;
 
-// var projection = d3.geo.mercator()
+// var projection = d3.geo.albersUsa()
+//   .scale(1300)
+//   .translate([width*2, height*2]);
 
   var path = d3.geo.path();
       // .projection(projection);
@@ -86,7 +88,7 @@ function ready(error, guns, us) {
   })
 
 
-console.log(gunsLookup)
+// console.log(gunsLookup)
 
   svg.selectAll(".counties")
       .data(countyFeatures)
@@ -100,7 +102,7 @@ console.log(gunsLookup)
       })
       .on("mouseenter", function(d) {
 
-          console.log(d);
+          // console.log(d);
 
           d3.select(this)
           .style("stroke-width", 1.5)
