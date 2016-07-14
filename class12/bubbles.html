@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+  circle {
+    /*stroke: #000*/;
+    opacity: 0.4;
+    -webkit-transition: .25s; /* Safari */
+      transition: .25s;
+  }
+
+</style>
+
+<body>
+  <div id="dataviz-container"></div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+<script>
+
+var el = window.document.querySelector('#dataviz-container')
+      , body = window.document.querySelector('body')
+  
+    var width = 1200,
+        height = 800;
+
+    var colorScale = d3.scale.category20c()
+        
+    var svg = d3.select(el)
+      .append("svg")
+        .attr("height", height)
+        .attr("width", width);
+        
+    svg.selectAll("circle")
+      .data(d3.range(3000).map(Object))
+        .enter().append("circle")
+        .attr("r", 30)
+        .attr("cx", function(d,i) { return Math.random()*1000 })
+        .attr("cy", function(d,i) { return Math.random()*1000 })
+        .style("fill", function(d, i) { return colorScale(i); });
+
+    d3.selectAll("circle")
+    .on("mouseenter", function() { 
+        d3.select(this)
+        // .remove()
+        .style("stroke", "#000").style("stroke-width", "2px").style("opacity", 0.8).style("z-index", 9999)
+        .attr("r", 100)
+    });
+
+    d3.selectAll("circle")
+    .on("mouseleave", function() { 
+        d3.select(this)
+        // .append()
+        .style("stroke-width", "0px").style("opacity", 0.4)
+        .attr("r", 30)
+    });
+
+
+
+</script>
